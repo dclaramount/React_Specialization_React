@@ -1,25 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg } from 'reactstrap';
 
-class DishDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    TransformDate(Date){
-      let DateandTime = new Date(Date);
-      return DateandTime.toDateString();
-    }
 
-    ChangeDate(StrDate){
+    function ChangeDate(StrDate){
       let MyDate = new Date(StrDate)
       return MyDate.toDateString();
 
     }
 
 
-
-    renderDish(_selecteddish){
+    function RenderDish({_selecteddish}){
       if (_selecteddish != null){
         //Render the Title (under the image)
           const dishTitle= (
@@ -49,7 +40,7 @@ class DishDetail extends Component {
           const Comments_Dishes= (_selecteddish.comments.map((d) =>
           <ul key={d.id}>
             <div className="row">{d.comment}</div>
-            <div className="row">-- {d.author}, {this.ChangeDate(d.date)} </div>
+            <div className="row">-- {d.author}, <ChangeDate StrDate = {d.date} /> </div> 
           </ul>));
       
 
@@ -75,9 +66,8 @@ class DishDetail extends Component {
           );
       }
   }
-    render() {
-        return this.renderDish(this.props.selectedDish);
-    };
-}
+
+const DishDetail = (props) => <RenderDish _selecteddish = {props.selectedDish} />;
+
 
 export default DishDetail; 
