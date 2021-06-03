@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
+import { Card, CardImg } from 'reactstrap';
 
 class DishDetail extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class DishDetail extends Component {
 
         //Render the Bundle (Image+ Title + Description)
           const dishImage = (
-            <div key={_selecteddish.id} className="col-12 col-md-5 m-1">
+            <div key={_selecteddish.id} className="col-12 col-md-5 m-5">
               <Card>
                   <CardImg widht="100%" src={_selecteddish.image} alt={_selecteddish.name} />
                   <h3>{dishTitle}</h3>
@@ -55,11 +55,13 @@ class DishDetail extends Component {
 
 
           return(
-            <div className="row col-12 m-5">
+            <div className="container">
+              <div className="row">
                 {dishImage}
-              <div className="col-12 col-md-5 m-1">
-                <h1>Comments</h1>
-                {Comments_Dishes}
+                <div className="col-12 col-md-5 m-5">
+                  <h1>Comments</h1>
+                    {Comments_Dishes}
+                </div>
               </div>
             </div>
           );
@@ -74,7 +76,6 @@ class DishDetail extends Component {
       }
   }
     render() {
-
         return this.renderDish(this.props.selectedDish);
     };
 }
