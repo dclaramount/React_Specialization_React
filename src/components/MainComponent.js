@@ -4,10 +4,6 @@ import Menu from './MenuComponents';
 import Contact from './ContactComponent'
 import DishDetail from './DishdetailComponent.js';
 import About from './AboutComponent.js';
-import {DISHES} from '../shared/dishes';
-import {COMMENTS} from '../shared/comments';
-import {LEADERS} from '../shared/leaders';
-import {PROMOTIONS} from '../shared/promotions';
 import Header from './HeaderComponent.js';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
@@ -20,16 +16,15 @@ const MapStatetoProps = state =>{
         dishes: state.dishes,
         comments: state.comments,
         promotions: state.promotions,
-        leaders: state.leaders
+        leaders: state.leaders,
+        contactformopen: state.contactformopen,
     }
 }
 
 class Main extends Component {
   
-  
   constructor (props){
     super(props);
-
   }
 
   render(){
@@ -43,8 +38,11 @@ class Main extends Component {
       
       const DishWithId = ({match}) => {
         return(
-          <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
-                      comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}></DishDetail>
+          <div>
+            <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+                        comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+                        contactform={this.props.contactformopen}></DishDetail>
+          </div>
         )
       }
 

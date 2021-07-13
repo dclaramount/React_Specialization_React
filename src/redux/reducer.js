@@ -8,7 +8,8 @@ export const InitState   ={
         dishes:     DISHES,
         comments:   COMMENTS,
         promotions: PROMOTIONS, 
-        leaders:     LEADERS
+        leaders:     LEADERS,
+        contactformopen: false,
 };
 
 export const Reducer = (state = InitState ,action) => {

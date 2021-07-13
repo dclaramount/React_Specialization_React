@@ -1,16 +1,16 @@
 import React from 'react';
 import { Card, CardImg, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import CommentForm from './CommentForm';
 
     function ChangeDate(StrDate){
       let MyDate = new Date(StrDate)
       return MyDate.toDateString();
 
-    }
+    };
 
     //Im only using one component to render both the comments and the Dish
-    function RenderDish({_selecteddish, _comments}){
+    function RenderDish({_selecteddish, _comments, formOpen}){
       if (_selecteddish != null){
         //Render the Title (under the image)
           const dishTitle= (
@@ -44,6 +44,7 @@ import { Link } from 'react-router-dom';
           </ul>));
       
 
+
           return(
             <div className="container">
               <div className="row">
@@ -51,7 +52,11 @@ import { Link } from 'react-router-dom';
                 <div className="col-12 col-md-5 m-5">
                   <h1>Comments</h1>
                     {Comments_Dishes}
+                    <CommentForm />
                 </div>
+              </div>
+              <div className="row">
+
               </div>
             </div>
           );
@@ -83,7 +88,7 @@ const DishDetail = (props) => {
                                             </div>
                                           </div>
                                           <div className="row">
-                                            <RenderDish _selecteddish = {props.dish} _comments={props.comments} />
+                                            <RenderDish _selecteddish = {props.dish} _comments={props.comments} _formopen={props.contactform} />
                                           </div>
                                         </div>
                                 )
