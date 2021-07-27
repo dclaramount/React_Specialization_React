@@ -8,6 +8,7 @@ import Header from './HeaderComponent.js';
 import Footer from './FooterComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { addComment } from '../redux/ActionCreators';
 
 
 //Map will return the redux state in to the props (that otherwise wouldve come from the constructor of the class)
@@ -20,6 +21,10 @@ const MapStatetoProps = state =>{
         contactformopen: state.contactformopen,
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+})
 
 class Main extends Component {
   
@@ -41,7 +46,8 @@ class Main extends Component {
           <div>
             <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
                         comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
-                        contactform={this.props.contactformopen}></DishDetail>
+                        contactform={this.props.contactformopen}
+                        addComment = {this.props.addComment}></DishDetail>
           </div>
         )
       }
@@ -63,4 +69,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(MapStatetoProps)(Main));
+export default withRouter(connect(MapStatetoProps, mapDispatchToProps)(Main));

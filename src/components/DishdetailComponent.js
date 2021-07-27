@@ -3,14 +3,10 @@ import { Card, CardImg, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 
-    function ChangeDate(StrDate){
-      let MyDate = new Date(StrDate)
-      return MyDate.toDateString();
-
-    };
 
     //Im only using one component to render both the comments and the Dish
-    function RenderDish({_selecteddish, _comments, formOpen}){
+    function RenderDish({_selecteddish, _comments, addComment, dishId}){
+
       if (_selecteddish != null){
         //Render the Title (under the image)
           const dishTitle= (
@@ -40,7 +36,7 @@ import CommentForm from './CommentForm';
           const Comments_Dishes= (_comments.map((d) =>
           <ul key={d.id}>
             <div className="row">{d.comment}</div>
-            <div className="row">-- {d.author}, <ChangeDate StrDate = {d.date} /> </div> 
+            <div className="row">-- {d.rating} , {d.author}, {(new Date(d.date)).toDateString()} </div> 
           </ul>));
       
 
@@ -52,7 +48,7 @@ import CommentForm from './CommentForm';
                 <div className="col-12 col-md-5 m-5">
                   <h1>Comments</h1>
                     {Comments_Dishes}
-                    <CommentForm />
+                    <CommentForm dishId={dishId} addComment={addComment} />
                 </div>
               </div>
               <div className="row">
@@ -88,10 +84,11 @@ const DishDetail = (props) => {
                                             </div>
                                           </div>
                                           <div className="row">
-                                            <RenderDish _selecteddish = {props.dish} _comments={props.comments} _formopen={props.contactform} />
+                                            <RenderDish _selecteddish = {props.dish} _comments={props.comments} _formopen={props.contactform} addComment={props.addComment} dishId={props.dish.id} />
                                           </div>
                                         </div>
                                 )
 }
+
                                 
 export default DishDetail;
