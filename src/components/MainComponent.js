@@ -52,7 +52,7 @@ class Main extends Component {
         )
       }
 
-      return (
+      return ( 
       <div>
         <Header />
         <Switch>
