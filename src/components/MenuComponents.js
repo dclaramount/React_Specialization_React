@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
 import {Link} from 'react-router-dom';
-
+import {Loading} from './LoadingComponent';
 
 
 
@@ -19,7 +19,8 @@ function RenderMenuItem({dish, onClick}){
 }
 
 const Menu = (props) => {
-    const menu = props.dishes.map((dish) => {
+    
+    const menu = props.dishes.dishes.map((dish) => {
         return (
           <div key={dish.id} className="col-12 col-md-5 m-5">
               <RenderMenuItem dish = {dish} />
@@ -27,21 +28,41 @@ const Menu = (props) => {
         );
     });
 
-    return (
-      <div className="container">
-        <div className="row">
-            <Breadcrumb>
-                <BreadcrumbItem><Link to='/Home'> Home </Link></BreadcrumbItem>
-                <BreadcrumbItem active> Menu </BreadcrumbItem>
-            </Breadcrumb>
-            <div class="col-12">
-                <h3> Menu </h3>
-                <hr />
+
+    if (props.dishes.isLoading)
+    {
+        return(
+            <Loading />
+        )
+    }
+    else if (props.dishes.errMess){
+        return(
+          <div className="container">
+            <div className="row">
+              <h4>{props.errMess}</h4>
             </div>
-            {menu}
+          </div>
+        );
+      }
+    else
+    {
+        return (
+        <div className="container">
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to='/Home'> Home </Link></BreadcrumbItem>
+                    <BreadcrumbItem active> Menu </BreadcrumbItem>
+                </Breadcrumb>
+                <div class="col-12">
+                    <h3> Menu </h3>
+                    <hr />
+                </div>
+                {menu}
+            </div>
         </div>
-      </div>
-    );
+    
+        );
+    }
 }
 
 
