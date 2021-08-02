@@ -3,6 +3,7 @@ import { Card, CardImg, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 import {Loading} from './LoadingComponent';
+import { baseUrl } from '../shared/baseurl'
 
     //Im only using one component to render both the comments and the Dish
     function RenderDish({_selecteddish, _comments, addComment, dishId}){
@@ -25,7 +26,7 @@ import {Loading} from './LoadingComponent';
           const dishImage = (
             <div key={_selecteddish.id} className="col-12 col-md-5 m-5">
               <Card>
-                  <CardImg widht="100%" src={_selecteddish.image} alt={_selecteddish.name} />
+                  <CardImg widht="100%" src={baseUrl + _selecteddish.image} alt={_selecteddish.name} />
                   <h3>{dishTitle}</h3>
                   {dishGeneral}
               </Card>
